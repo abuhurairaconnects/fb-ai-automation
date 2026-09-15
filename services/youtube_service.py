@@ -116,22 +116,22 @@ class YouTubeService:
         Prefers Bengali ('bn', 'bn-BD', 'bn-IN'), then English ('en', 'en-US'), or any available.
         """
         try:
-            # Check available transcript languages
-            transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+            api = YouTubeTranscriptApi()
+            transcript_list = api.list(video_id)
             
-            # 1. Look for manually created Bengali
+            # 1. Look for Bengali or English transcripts
             try:
                 transcript = transcript_list.find_transcript(['bn', 'bn-BD', 'bn-IN', 'en', 'en-US'])
                 items = transcript.fetch()
-                return " ".join([i['text'] for i in items])
+                return " ".join([i.text if hasattr(i, 'text') else i.get('text', '') for i in items])
             except Exception:
                 pass
 
-            # 2. Look for auto-generated transcript and translate or take it directly
+            # 2. Iterate through any available transcript
             for t in transcript_list:
                 try:
                     items = t.fetch()
-                    return " ".join([i['text'] for i in items])
+                    return " ".join([i.text if hasattr(i, 'text') else i.get('text', '') for i in items])
                 except Exception:
                     continue
 

@@ -38,8 +38,8 @@ class GeminiService:
             logger.warning("GEMINI_API_KEY is not configured.")
             return "দুঃখিত, বর্তমানে এআই সিস্টেম কনফিগার করা নেই।"
 
-        # Fallback model list if 2.5-flash is not available in some regions
-        models_to_try = [self.model, "gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"]
+        # Fallback model list
+        models_to_try = [self.model, "gemini-3.6-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
         # Remove duplicates while preserving order
         seen = set()
         models = [m for m in models_to_try if not (m in seen or seen.add(m))]

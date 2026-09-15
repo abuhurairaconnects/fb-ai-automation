@@ -50,6 +50,7 @@ class TelegramService:
         # Message handler for receiving YouTube links
         self.app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, self._handle_text_message))
 
+        await self.app.initialize()
         return self.app
 
     async def send_draft_for_approval(self, draft_data: Dict[str, Any]) -> bool:
