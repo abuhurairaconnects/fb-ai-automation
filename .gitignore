@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Environment secrets
+.env
+
+# Processed history
+processed_videos.json
+
+# Python cache & tests
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  fb-automation:
+    build: .
+    container_name: fb_ai_automation
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./knowledge_base.json:/app/knowledge_base.json
+      - ./processed_videos.json:/app/processed_videos.json
